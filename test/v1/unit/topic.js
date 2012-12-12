@@ -4,6 +4,25 @@ var should = require('should'),
 
 describe('Topic', function() {
 
+  describe('static function', function() {
+
+    it('#create() should write to the database', function(done) {
+      var topic = Topic.build({
+        title: 'Topic title'
+      });
+
+      topic.save()
+        .success(function(result) {
+          result.title.should.equal('Topic title');
+          return done();
+        })
+        .error(function(error) {
+          return done(error);
+        });
+    });
+
+  });
+
   describe('validation', function() {
 
     it('should not pass with empty title', function() {
