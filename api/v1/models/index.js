@@ -13,39 +13,41 @@ module.exports = (function() {
    */
 
   if(!sequelize) {
-    var user, options, password;
+    var user, password, database, options = {};
     var env = process.env.NODE_ENV || 'development';
 
     if(env === 'production') {
       user = process.env.DB_USER;
       password = process.env.DB_PASSWORD;
+      database = 'content_api_production';
 
-      options = {
-        dialect: 'mysql',
-        host: 'localhost',
-
-        define: {
-          charset: 'utf8',
-          timeStamps: true,
-          underscore: true
-        }
-      };
+      options.dialect = 'mysql';
+      options.host = 'localhost';
     }
     else {
       user = 'root';
       password = '';
+      database = 'content_api_development';
 
-      options = {
-        dialect: 'sqlite',
-        storage: __dirname + 'database.sqlite'
-      };
+      options.dialect = 'sqlite';
+      options.storage = './database.sqlite';
     }
+
+    /**
+     * Base options
+     */
+
+    options.define = {
+      charset: 'utf8',
+      timeStamps: true,
+      underscored: true
+    };
 
     /**
      * Define the new database connection
      */
 
-    sequelize = new Sequelize(user, password, options);
+    sequelize = new Sequelize(database, user, password, options);
   }
 
   /**
