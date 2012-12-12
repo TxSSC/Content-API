@@ -3,6 +3,12 @@ var should = require('should'),
 
 describe('User', function() {
 
+  before(function(done) {
+    User.sync().success(function() {
+      done();
+    });
+  });
+
   after(function(done) {
     User.drop().success(function() {
       done();
