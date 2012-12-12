@@ -3,6 +3,12 @@ var should = require('should'),
 
 describe('User', function() {
 
+  after(function(done) {
+    User.drop().success(function() {
+      done();
+    });
+  });
+
   describe('.validations', function() {
 
     describe('with invalid records', function() {
