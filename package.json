@@ -1,0 +1,31 @@
+{
+  "name": "Content-API",
+  "description": "A MySQL based content API",
+  "version": "0.0.1",
+  "private": true,
+  "maintainers" : [
+    "particlebanana <particlebanana@gmail.com>",
+    "vanetix <matmcfarland@gmail.com>"
+  ],
+  "url": "https://github.com/TxSSC/Content-API",
+  "license" : "MIT",
+  "dependencies": {
+    "express": "3.0.x",
+    "sequelize": "1.6.x"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  },
+  "scripts": {
+    "test": "mocha test/**"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:TxSSC/Content-API.git"
+  },
+  "main": "app.js",
+  "engines": {
+    "node": ">=0.6.x"
+  }
+}
