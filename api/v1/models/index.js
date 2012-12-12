@@ -23,6 +23,7 @@ module.exports = (function() {
 
       options.dialect = 'mysql';
       options.host = 'localhost';
+      options.logging = false;
     }
     else {
       user = 'root';
