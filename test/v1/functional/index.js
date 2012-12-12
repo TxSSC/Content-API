@@ -1,0 +1,5 @@
+/**
+ * Expose tests
+ */
+
+ module.exports = { };
