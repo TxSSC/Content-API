@@ -23,6 +23,39 @@ module.exports = function(sequelize) {
      * Model properties
      */
 
+    title: {
+      type: Sequelize.STRING,
+      validate: {
+        notEmpty: true,
+        notNull: true
+      }
+    },
+    permalink: {
+      type: Sequelize.STRING,
+      unique: true,
+      validate: {
+        notNull: false,
+        urlSafe: function(value) {
+          if(!/[a-z\-_0-9]/i.test(value)) {
+            throw new Error('Invalid permalink');
+          }
+        }
+      }
+    }
+  },
+  {
+    /**
+     * Model functions
+     */
+
+    instanceMethods: {
+      createPermalink: function() {
+        this.permalink = this.permalink
+                            .replace(/[^\w\d\s]+/g, '')
+                            .replace(/\s+/g, '_');
+        return this;
+      }
+    }
   });
 
   /**
