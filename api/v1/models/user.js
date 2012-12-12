@@ -23,6 +23,32 @@ module.exports = function(sequelize) {
      * Model properties
      */
 
+    first_name: {
+      type: Sequelize.STRING,
+      validate: {
+        isAlpha: true,
+        notNull: true,
+        notEmpty: true
+      }
+    },
+
+    last_name: {
+      type: Sequelize.STRING,
+      validate: {
+        isAlpha: true,
+        notNull: true,
+        notEmpty: true
+      }
+    },
+
+    email: {
+      type: Sequelize.STRING,
+      validate: {
+        isEmail: true,
+        notNull: true,
+        notEmpty: true
+      }
+    }
   });
 
   /**
