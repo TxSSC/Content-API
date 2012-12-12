@@ -1,5 +1,5 @@
 var should = require('should'),
-    User = require('../../../api/v1/models').User;
+    User = require('../support').models.User;
 
 describe('User', function() {
 
