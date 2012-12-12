@@ -3,21 +3,21 @@
  */
 
 var http = require('http'),
-    path = require('path'),
-    express = require('express');
+    express = require('express'),
+    addons = require('./lib/utils/addons'),
+    app;
 
 /**
  * Set up the express app
  */
 
-var app = express();
+app = express();
 
 app.configure(function() {
   app.set('port', process.env.PORT || 3000);
-  app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(express.cookieParser(process.env.SESSION_SECRET || 'alligator fish party'));
-  app.use(express.session());
+  app.use(express.json());
+  app.use(express.urlencoded());
   app.use(app.router);
 });
 
@@ -28,6 +28,16 @@ app.configure('production', function() {
 app.configure('development', function() {
   app.use(express.logger('dev'));
   app.use(express.errorHandler());
+});
+
+// Add `app.map` to the app
+addons.map.call(app);
+
+// Add routes
+app.map({
+  '/api': {
+    '/v1': require('./api').v1()
+  }
 });
 
 http.createServer(app).listen(app.get('port'), function() {
