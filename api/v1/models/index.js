@@ -26,7 +26,8 @@ module.exports = (function() {
 
         define: {
           charset: 'utf8',
-          timeStamps: true
+          timeStamps: true,
+          underscore: true
         }
       };
     }
