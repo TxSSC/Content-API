@@ -30,7 +30,7 @@ module.exports = (function() {
       database = 'content_api_development';
 
       options.dialect = 'sqlite';
-      options.storage = './database.sqlite';
+      options.storage = '/tmp/database.sqlite';
     }
 
     /**
