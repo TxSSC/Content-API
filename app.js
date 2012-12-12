@@ -1,6 +1,14 @@
+/**
+ * Module dependencies
+ */
+
 var http = require('http'),
     path = require('path'),
     express = require('express');
+
+/**
+ * Set up the express app
+ */
 
 var app = express();
 
