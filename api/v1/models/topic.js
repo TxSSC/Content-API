@@ -34,7 +34,6 @@ module.exports = function(sequelize) {
       type: Sequelize.STRING,
       unique: true,
       validate: {
-        notNull: false,
         urlSafe: function(value) {
           if(!/[a-z\-_0-9]/i.test(value)) {
             throw new Error('Invalid permalink');
@@ -50,7 +49,8 @@ module.exports = function(sequelize) {
 
     instanceMethods: {
       createPermalink: function() {
-        this.permalink = this.permalink
+        this.permalink = this.title
+                            .toLowerCase()
                             .replace(/[^\w\d\s]+/g, '')
                             .replace(/\s+/g, '_');
         return this;
