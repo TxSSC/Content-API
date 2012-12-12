@@ -16,6 +16,15 @@ module.exports = {
       },
       email: {
         type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+      },
+      updated_at: {
+        type: DataTypes.DATE,
+        allowNull: false
+      },
+      created_at: {
+        type: DataTypes.DATE,
         allowNull: false
       }
     },
