@@ -57,12 +57,12 @@ module.exports = (function() {
 
   return {
     Sequelize: sequelize,
-    User: require('./user')(sequelize),
-    Topic: require('./topic')(sequelize),
-    Item: require('./item')(sequelize),
-    Commit: require('./commit')(sequelize),
-    Version: require('./version')(sequelize),
-    Comment: require('./comment')(sequelize)
+    User: sequelize.import(__dirname + '/user'),
+    Topic: sequelize.import(__dirname + '/topic'),
+    Item: sequelize.import(__dirname + '/item'),
+    Commit: sequelize.import(__dirname + '/commit'),
+    Version: sequelize.import(__dirname + '/version'),
+    Comment: sequelize.import(__dirname + '/comment')
   };
 
 }).call(null);

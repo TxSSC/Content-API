@@ -1,17 +1,12 @@
 /**
- * Module dependencies
- */
-
-var Sequelize = require('sequelize');
-
-/**
- * Expose the Commit model `boot` function
+ * `Commit` model
  *
  * @param {Object} sequelize
+ * @param {Object} DataTypes
  * @return {Object} Commit
  */
 
-module.exports = function(sequelize) {
+module.exports = function(sequelize, DataTypes) {
 
   /**
    * Commit model definition

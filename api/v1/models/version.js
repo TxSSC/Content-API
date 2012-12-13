@@ -1,19 +1,17 @@
 /**
- * Module dependencies
- */
-
-var Sequelize = require('sequelize');
-
-/**
- * Expose the Version model `boot` function
+ * `Version` model
  *
  * @param {Object} sequelize
  * @return {Object} Version
  */
 
-module.exports = function(sequelize) {
+module.exports = function(sequelize, DataTypes) {
 
-  var Topic = require('./topic')(sequelize);
+  /**
+   * Model dependencies for associations
+   */
+
+  var Topic = sequelize.import(__dirname + '/topic');
 
   /**
    * Version model definition
@@ -26,19 +24,22 @@ module.exports = function(sequelize) {
      */
 
     name: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       validate: {
         notEmpty: true,
         notNull: true
       }
     },
     published: {
-      type: Sequelize.BOOLEAN
+      type: DataTypes.BOOLEAN
     }
 
   });
 
-  // Association
+  /**
+   * Model Associations
+   */
+
   Version.belongsTo(Topic);
 
   /**

@@ -1,17 +1,12 @@
 /**
- * Module dependencies
- */
-
-var Sequelize = require('sequelize');
-
-/**
- * Expose the Item model `boot` function
+ * `Item` model
  *
  * @param {Object} sequelize
+ * @param {Object} DataTypes
  * @return {Object} Item
  */
 
-module.exports = function(sequelize) {
+module.exports = function(sequelize, DataTypes) {
 
   /**
    * Item model definition

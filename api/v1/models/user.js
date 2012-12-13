@@ -1,17 +1,12 @@
 /**
- * Module dependencies
- */
-
-var Sequelize = require('sequelize');
-
-/**
- * Expose the User model `boot` function
+ * `User` model
  *
  * @param {Object} sequelize
+ * @param {Object} DataTypes
  * @return {Object} User
  */
 
-module.exports = function(sequelize) {
+module.exports = function(sequelize, DataTypes) {
 
   /**
    * User model definition
@@ -24,7 +19,7 @@ module.exports = function(sequelize) {
      */
 
     first_name: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       validate: {
         isAlpha: true,
         notNull: true,
@@ -33,7 +28,7 @@ module.exports = function(sequelize) {
     },
 
     last_name: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       validate: {
         isAlpha: true,
         notNull: true,
@@ -42,7 +37,7 @@ module.exports = function(sequelize) {
     },
 
     email: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       validate: {
         isEmail: true,
         notNull: true,

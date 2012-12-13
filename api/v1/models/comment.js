@@ -1,17 +1,12 @@
 /**
- * Module dependencies
- */
-
-var Sequelize = require('sequelize');
-
-/**
- * Expose the Comment model `boot` function
+ * `Comment` model
  *
  * @param {Object} sequelize
+ * @param {Object} DataTypes
  * @return {Object} Comment
  */
 
-module.exports = function(sequelize) {
+module.exports = function(sequelize, DataTypes) {
 
   /**
    * Comment model definition

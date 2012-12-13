@@ -1,17 +1,12 @@
 /**
- * Module dependencies
- */
-
-var Sequelize = require('sequelize');
-
-/**
- * Expose the Topic model `boot` function
+ * `Topic` model
  *
  * @param {Object} sequelize
+ * @param {Object} DataTypes
  * @return {Object} Topic
  */
 
-module.exports = function(sequelize) {
+module.exports = function(sequelize, DataTypes) {
 
   /**
    * Topic model definition
@@ -24,14 +19,14 @@ module.exports = function(sequelize) {
      */
 
     title: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       validate: {
         notEmpty: true,
         notNull: true
       }
     },
     permalink: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       unique: true,
       validate: {
         urlSafe: function(value) {
