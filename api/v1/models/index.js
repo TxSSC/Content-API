@@ -108,7 +108,8 @@ module.exports = (function() {
           .hasMany(models.Comment, { as: 'Comments' });
 
   models.Topic
-          .hasMany(models.Version, { as: 'Versions' });
+          .hasMany(models.Version, { as: 'Versions' })
+          .hasMany(models.Item, { as: 'Items' });
 
   models.Item
           .belongsTo(models.Topic)
