@@ -38,8 +38,8 @@ Items.index = function(req, res) {
 Items.show = function(req, res) {
   Item.find({
     where: {
-      topic_id: req.params.topic_id,
-      item_id: req.params.item_id
+      id: req.params.item_id,
+      topic_id: req.params.topic_id
     }
   }).complete(function(err, item) {
     if(err) return res.json(500, {error: err});
@@ -82,8 +82,8 @@ Items.create = function(req, res) {
 Items.update = function(req, res) {
   Item.find({
     where: {
-      topic_id: req.params.topic_id,
-      item_id: req.params.item_id
+      id: req.params.item_id,
+      topic_id: req.params.topic_id
     }
   }).complete(function(err, item) {
     if(err) return res.json(500, {error: err});
@@ -106,8 +106,8 @@ Items.update = function(req, res) {
 Items.destroy = function(req, res) {
   Item.find({
     where: {
-      topic_id: req.params.topic_id,
-      item_id: req.params.item_id
+      id: req.params.item_id,
+      topic_id: req.params.topic_id
     }
   }).complete(function(err, item) {
     if(err) return res.json(500, {error: err});
