@@ -18,6 +18,14 @@ module.exports = function(sequelize, DataTypes) {
      * Model properties
      */
 
+    content: {
+      type: DataTypes.TEXT,
+      validate: {
+        notEmpty: true,
+        notNull: true
+      }
+    }
+
   });
 
   /**

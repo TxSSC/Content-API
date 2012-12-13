@@ -7,5 +7,6 @@ module.exports = {
   Item: require('./item'),
   User: require('./user'),
   Version: require('./version'),
-  Comment: require('./comment')
+  Comment: require('./comment'),
+  Commit: require('./commit')
 };
