@@ -9,6 +9,12 @@
 module.exports = function(sequelize, DataTypes) {
 
   /**
+   * Model dependencies for associations
+   */
+
+  var Topic = sequelize.import(__dirname + '/topic');
+
+  /**
    * Item model definition
    */
 
@@ -18,7 +24,21 @@ module.exports = function(sequelize, DataTypes) {
      * Model properties
      */
 
+    title: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true,
+        notNull: true
+      }
+    }
+
   });
+
+  /**
+   * Model associations
+   */
+
+  Item.belongsTo(Topic);
 
   /**
    * Return Item model
