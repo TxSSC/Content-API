@@ -73,7 +73,7 @@ module.exports = (function() {
   // Versions Associations
   models.Topic.hasMany(models.Version, { as: 'Versions' });
   models.Item.belongsTo(models.Topic);
-  models.Item.hasMany(models.Commit);
+  models.Item.hasMany(models.Commit, { as: 'Commits'});
   models.Version.belongsTo(models.Topic);
   models.Commit.belongsTo(models.Item);
   models.Commit.belongsTo(models.User);
