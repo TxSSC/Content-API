@@ -37,7 +37,18 @@ module.exports = {
     '/:topic_id': {
       get: controllers.Topics.show,
       put: controllers.Topics.update,
-      del: controllers.Topics.destroy
+      del: controllers.Topics.destroy,
+
+      '/versions': {
+        get: controllers.Versions.index,
+        post: controllers.Versions.create,
+
+        '/:version_id': {
+          get: controllers.Versions.show,
+          put: controllers.Versions.update,
+          del: controllers.Versions.destroy
+        }
+      }
     }
   }
 
