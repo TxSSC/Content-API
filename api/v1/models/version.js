@@ -8,12 +8,6 @@
 module.exports = function(sequelize, DataTypes) {
 
   /**
-   * Model dependencies for associations
-   */
-
-  var Topic = sequelize.import(__dirname + '/topic');
-
-  /**
    * Version model definition
    */
 
@@ -35,12 +29,6 @@ module.exports = function(sequelize, DataTypes) {
     }
 
   });
-
-  /**
-   * Model Associations
-   */
-
-  Version.belongsTo(Topic);
 
   /**
    * Return Version model

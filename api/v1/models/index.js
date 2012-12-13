@@ -1,5 +1,6 @@
 var sequelize,
-    Sequelize = require('sequelize');
+    Sequelize = require('sequelize'),
+    models;
 
 /**
  * Create a self calling function to define the database connection
@@ -52,10 +53,10 @@ module.exports = (function() {
   }
 
   /**
-   * Return all models
+   * Build Models Object
    */
 
-  return {
+  models = {
     Sequelize: sequelize,
     User: sequelize.import(__dirname + '/user'),
     Topic: sequelize.import(__dirname + '/topic'),
@@ -64,5 +65,18 @@ module.exports = (function() {
     Version: sequelize.import(__dirname + '/version'),
     Comment: sequelize.import(__dirname + '/comment')
   };
+
+  /**
+   * Set Associations
+   */
+
+  models.Topic.hasMany(models.Version, { as: 'Versions' });
+  models.Version.belongsTo(models.Topic);
+
+  /**
+   * Return all models
+   */
+
+  return models;
 
 }).call(null);
