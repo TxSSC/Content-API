@@ -1,5 +1,7 @@
 {
   "development": {
+    "dialect": "sqlite",
+    "storage": "/tmp/database.sqlite",
     "username":"root",
     "password":null,
     "database":"content_api_development",
