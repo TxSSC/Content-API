@@ -19,6 +19,17 @@ module.exports = {
    * 2 - Creator (can create buckets, items and properties)
    */
 
+  '/users': {
+    get: controllers.Users.index,
+    post: controllers.Users.create,
+
+    '/:id': {
+      get: controllers.Users.show,
+      put: controllers.Users.update,
+      del: controllers.Users.destroy
+    }
+  },
+
   '/topics': {
     get: controllers.Topics.index,
     post: controllers.Topics.create,
@@ -29,4 +40,5 @@ module.exports = {
       del: controllers.Topics.destroy
     }
   }
+
 };
