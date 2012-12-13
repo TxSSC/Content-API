@@ -11,3 +11,9 @@ Fixtures.Topic = function() {
     permalink: 'topic-model'
   });
 };
+
+Fixtures.Version = function() {
+  return Models.Version.build({
+    name: 'Version Model'
+  });
+};

@@ -1,6 +1,7 @@
 var should = require('should'),
     Topic = require('../support').models.Topic,
-    Helpers = require('../support').helpers;
+    Helpers = require('../support').helpers,
+    Fixtures = require('../support/fixtures');
 
 describe('Topic', function() {
 
@@ -58,6 +59,34 @@ describe('Topic', function() {
 
       topic.createPermalink();
       topic.permalink.should.equal('topic_title');
+    });
+
+  });
+
+  describe('associations', function() {
+    var topic;
+
+    before(function(done) {
+      Topic.create({ title: 'Topic title', permalink: 'topic-child-test' })
+	.success(function(record) {
+	  topic = record;
+
+	  var version = Fixtures.Version();
+	  version.topic_id = record.id;
+	  version.save().success(function() {
+	    done();
+	  });
+	});
+    });
+
+    it('should allow many versions', function(done) {
+
+      topic.getVersions().success(function(versions) {
+	should.exist(versions);
+	versions.should.be.an.instanceof(Array);
+	versions[0].name.should.eql('Version Model');
+	done();
+      });
     });
 
   });
