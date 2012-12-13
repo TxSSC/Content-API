@@ -13,6 +13,8 @@ var Sequelize = require('sequelize');
 
 module.exports = function(sequelize) {
 
+  var Topic = require('./topic')(sequelize);
+
   /**
    * Version model definition
    */
@@ -23,7 +25,21 @@ module.exports = function(sequelize) {
      * Model properties
      */
 
+    name: {
+      type: Sequelize.STRING,
+      validate: {
+	notEmpty: true,
+	notNull: true
+      }
+    },
+    published: {
+      type: Sequelize.BOOLEAN
+    }
+
   });
+
+  // Association
+  Version.belongsTo(Topic);
 
   /**
    * Return Version model
