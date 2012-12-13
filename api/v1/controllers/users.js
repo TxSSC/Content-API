@@ -5,7 +5,7 @@
 var UserModel = require('../models').User;
 
 /**
- * Expose Topics controller
+ * Expose Users controller
  */
 
 var User = module.exports = exports;
