@@ -37,9 +37,9 @@ module.exports = {
     });
 
     // Foreign Key Index
-    migration.addIndex('items', ['item_id']);
-    migration.addIndex('items', ['version_id']);
-    migration.addIndex('items', ['user_id']);
+    migration.addIndex('comments', ['item_id']);
+    migration.addIndex('comments', ['version_id']);
+    migration.addIndex('comments', ['user_id']);
   },
   down: function(migration) {
     migration.dropTable('comments');
