@@ -34,16 +34,7 @@ Comments.index = function(req, res) {
  */
 
 Comments.show = function(req, res) {
-  Comment.find({
-    where: {
-      id: req.params.comment_id,
-      version_id: req.params.version_id
-    }
-  }).complete(function(err, comment) {
-    if(err) return res.json(500, {error: err});
-    if(!comment) return res.json(404, {error: 'not found'});
-    return res.json(200, comment);
-  });
+  return res.json(200, req.data.comment);
 };
 
 /**
@@ -79,19 +70,11 @@ Comments.create = function(req, res) {
  */
 
 Comments.update = function(req, res) {
-  Comment.find({
-    where: {
-      id: req.params.comment_id,
-      version_id: req.params.version_id
-    }
-  }).complete(function(err, comment) {
-    if(err) return res.json(500, {error: err});
-    if(!comment) return res.json(404, {error: 'not found'});
+  if(!req.body) return res.json(400, { error: 'invalid json' });
 
-    comment.update(req.body, function(err, comment) {
-      if(err) return res.json(500, {error: err});
-      return res.json(200, comment);
-    });
+  req.data.comment.update(req.body, function(err, comment) {
+    if(err) return res.json(500, {error: err});
+    return res.json(200, comment);
   });
 };
 
@@ -103,18 +86,8 @@ Comments.update = function(req, res) {
  */
 
 Comments.destroy = function(req, res) {
-  Comment.find({
-    where: {
-      id: req.params.comment_id,
-      version_id: req.params.version_id
-    }
-  }).complete(function(err, comment) {
-    if(err) return res.json(500, {error: err});
-    if(!comment) return res.json(404, {error: 'not found'});
-
-    comment.destroy().complete(function(err) {
-      if(err) return res.json(500, {error: err});
-      return res.json(200, {status: 1});
-    });
+  req.data.comment.destroy().complete(function(err, result) {
+    if(err) return res.json(500, err);
+    res.json(200, { status: 1 });
   });
 };

@@ -35,15 +35,7 @@ Versions.index = function(req, res) {
  */
 
 Versions.show = function(req, res) {
-  var id = req.params.version_id,
-      topic_id = req.params.topic_id;
-
-  Version.find({ where: { topic_id: topic_id, id: id }})
-    .complete(function(err, version) {
-      if(err) return res.json(500, err);
-      if(!version) return res.json(404, { error: 'Not found' });
-      return res.json(200, version);
-    });
+  return res.json(200, req.data.version);
 };
 
 /**
@@ -76,21 +68,12 @@ Versions.create = function(req, res) {
  */
 
 Versions.update = function(req, res) {
-  var id = req.params.version_id,
-      topic_id = req.params.topic_id;
-
   if(!req.body) return res.json(400, { error: 'invalid json' });
 
-  Version.find({ where: { topic_id: topic_id, id: id }})
-    .complete(function(err, version) {
-      if(err) return res.json(500, err);
-      if(!version) return res.json(404, {error: 'Not found'});
-
-      version.update(req.body, function(err, topic) {
-        if(err) return res.json(500, err);
-        return res.json(topic);
-      });
-    });
+  req.data.version.update(req.body, function(err, version) {
+    if(err) return res.json(500, err);
+    return res.json(version);
+  });
 };
 
 /**
@@ -101,18 +84,8 @@ Versions.update = function(req, res) {
  */
 
 Versions.destroy = function(req, res) {
-  var id = req.params.version_id,
-      topic_id = req.params.topic_id;
-
-  Version.find({ where: { topic_id: topic_id, id: id }})
-    .complete(function(err, version) {
-      if(err) return res.json(500, err);
-      if(!version) return res.json(404, { error: 'Not found'});
-
-      version.destroy().done(function(error, result) {
-        if(error) return res.json(500, error);
-        res.json(200, { status: 1 });
-      });
-    });
-
+  req.data.version.destroy().complete(function(err, result) {
+    if(err) return res.json(500, err);
+    res.json(200, { status: 1 });
+  });
 };

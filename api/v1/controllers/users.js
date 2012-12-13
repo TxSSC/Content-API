@@ -30,11 +30,7 @@ User.index = function(req, res) {
  */
 
 User.show = function(req, res) {
-  UserModel.find(req.params.id).done(function(err, result) {
-    if(err) return res.json(500, err);
-    if(!result) return res.json(404, { error: 'Not found' });
-    return res.json(200, result);
-  });
+  return res.json(200, req.data.user);
 };
 
 /**
@@ -66,14 +62,9 @@ User.create = function(req, res) {
 User.update = function(req, res) {
   if(!req.body) return res.json(400, { error: 'invalid json' });
 
-  User.find(req.params.id).complete(function(err, user) {
+  req.data.user.update(req.body, function(err, user) {
     if(err) return res.json(500, err);
-    if(!user) return res.json(404, {error: 'Not found'});
-
-    user.update(req.body, function(err, user) {
-      if(err) return res.json(500, err);
-      return res.json(user);
-    });
+    return res.json(user);
   });
 };
 
@@ -84,13 +75,8 @@ User.update = function(req, res) {
  */
 
 User.destroy = function(req, res) {
-  UserModel.find(req.params.id).done(function(err, user) {
-    if(err) return res.json(500, err);
-    if(!user) return res.json(400, { error: 'Not found' });
-
-    user.destroy().done(function(error, result) {
-      if(error) return res.json(400, { error: error });
-      res.json(200, { status: 1 });
-    });
+  req.data.user.destroy().done(function(err, result) {
+    if(err) return res.json(500, { error: err });
+    res.json(200, { status: 1 });
   });
 };

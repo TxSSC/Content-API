@@ -36,16 +36,7 @@ Items.index = function(req, res) {
  */
 
 Items.show = function(req, res) {
-  Item.find({
-    where: {
-      id: req.params.item_id,
-      topic_id: req.params.topic_id
-    }
-  }).complete(function(err, item) {
-    if(err) return res.json(500, {error: err});
-    if(!item) return res.json(404, {error: 'not found'});
-    return res.json(200, item);
-  });
+  return res.json(200, req.data.item);
 };
 
 /**
@@ -80,19 +71,11 @@ Items.create = function(req, res) {
  */
 
 Items.update = function(req, res) {
-  Item.find({
-    where: {
-      id: req.params.item_id,
-      topic_id: req.params.topic_id
-    }
-  }).complete(function(err, item) {
-    if(err) return res.json(500, {error: err});
-    if(!item) return res.json(404, {error: 'not found'});
+  if(!req.body) return res.json(400, { error: 'invalid json' });
 
-    item.update(req.body, function(err, item) {
-      if(err) return res.json(500, {error: err});
-      return res.json(200, item);
-    });
+  req.data.item.update(req.body, function(err, item) {
+    if(err) return res.json(500, {error: err});
+    return res.json(200, item);
   });
 };
 
@@ -104,18 +87,8 @@ Items.update = function(req, res) {
  */
 
 Items.destroy = function(req, res) {
-  Item.find({
-    where: {
-      id: req.params.item_id,
-      topic_id: req.params.topic_id
-    }
-  }).complete(function(err, item) {
+  req.data.item.destroy().complete(function(err) {
     if(err) return res.json(500, {error: err});
-    if(!item) return res.json(404, {error: 'not found'});
-
-    item.destroy().complete(function(err) {
-      if(err) return res.json(500, {error: err});
-      return res.json(200, {status: 1});
-    });
+    return res.json(200, {status: 1});
   });
 };
