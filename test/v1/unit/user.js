@@ -52,22 +52,24 @@ describe('User', function() {
 
   });
 
-  describe('write to db', function() {
-    var user;
+  describe('static function', function() {
 
-    before(function() {
-      user = User.build({
+    it('#save() should write to the database', function(done) {
+      var user = User.build({
         first_name: 'Han',
         last_name: 'Solo',
         email: 'han.solo@gmail.com'
       });
-    });
 
-    it('should save the user', function(done) {
-      user.save().success(function(record) {
-        record.email.should.eql('han.solo@gmail.com');
-        done();
-      });
+      user.save()
+	.success(function(result) {
+	  result.email.should.equal('han.solo@gmail.com');
+	  return done();
+	})
+	.error(function(error) {
+	  return done(error);
+	});
+
     });
   });
 
