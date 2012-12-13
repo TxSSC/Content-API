@@ -70,8 +70,17 @@ module.exports = (function() {
    * Set Associations
    */
 
+  // Versions Associations
   models.Topic.hasMany(models.Version, { as: 'Versions' });
   models.Version.belongsTo(models.Topic);
+
+  // Comments associations
+  models.User.hasMany(models.Comment, { as: 'Comments' });
+  models.Item.hasMany(models.Comment, { as: 'Comments' });
+  models.Version.hasMany(models.Comment, { as: 'Comments' });
+  models.Comment.belongsTo(models.User);
+  models.Comment.belongsTo(models.Item);
+  models.Comment.belongsTo(models.Version);
 
   /**
    * Return all models
