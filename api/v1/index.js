@@ -15,6 +15,17 @@ module.exports = function() {
    */
 
   return {
+    // /users
+    '/users': {
+      get: controllers.Users.index,
+      post: controllers.Users.create,
 
+      // /users/:id
+      '/:id': {
+        get: controllers.Users.show,
+        put: controllers.Users.update,
+        del: controllers.Users.destroy
+      }
+    }
   };
 };
