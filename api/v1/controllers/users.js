@@ -1,9 +1,14 @@
 /**
- * RESTful methods for User Model
+ * Model dependencies
  */
 
-var User = module.exports = exports,
-    UserModel = require('../models').User;
+var UserModel = require('../models').User;
+
+/**
+ * Expose Topics controller
+ */
+
+var User = module.exports = exports;
 
 /**
  * GET /users

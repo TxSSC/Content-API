@@ -3,5 +3,6 @@
  */
 
 module.exports = {
-  Topics: require('./topics')
+  Topics: require('./topics'),
+  Users: require('./users')
 };
