@@ -50,9 +50,6 @@ describe('Item', function() {
         .success(function(item) {
           item.topic_id.should.equal(topic.id);
           return done();
-        })
-        .error(function(error) {
-          return done(error);
         });
   });
 

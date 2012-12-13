@@ -24,9 +24,6 @@ describe('Topic', function() {
         .success(function(result) {
           result.title.should.equal('Topic title');
           return done();
-        })
-        .error(function(error) {
-          return done(error);
         });
     });
 
