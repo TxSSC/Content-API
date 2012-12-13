@@ -68,24 +68,24 @@ describe('Topic', function() {
 
     before(function(done) {
       Topic.create({ title: 'Topic title', permalink: 'topic-child-test' })
-	.success(function(record) {
-	  topic = record;
+        .success(function(record) {
+          topic = record;
 
-	  var version = Fixtures.Version();
-	  version.topic_id = record.id;
-	  version.save().success(function() {
-	    done();
-	  });
-	});
+          var version = Fixtures.Version();
+          version.topic_id = record.id;
+          version.save().success(function() {
+            done();
+          });
+      });
     });
 
     it('should allow many versions', function(done) {
 
       topic.getVersions().success(function(versions) {
-	should.exist(versions);
-	versions.should.be.an.instanceof(Array);
-	versions[0].name.should.eql('Version Model');
-	done();
+        should.exist(versions);
+        versions.should.be.an.instanceof(Array);
+        versions[0].name.should.eql('Version Model');
+        done();
       });
     });
 
