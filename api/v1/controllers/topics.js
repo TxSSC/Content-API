@@ -19,7 +19,7 @@ var Topics = module.exports = exports;
 
 Topics.index = function(req, res) {
   Topic.findAll().complete(function(err, topics) {
-    if(err) return res.json(500, err);
+    if(err) return res.json(500, {error: err});
     return res.json(200, topics);
   });
 };
@@ -33,8 +33,8 @@ Topics.index = function(req, res) {
 
 Topics.show = function(req, res) {
   Topic.find(req.params.topic_id).complete(function(err, topic) {
-    if(err) return res.json(500, err);
-    if(!topic) return res.json(404, {error: 'Not found'});
+    if(err) return res.json(500, {error: err});
+    if(!topic) return res.json(404, {error: 'not found'});
     return res.json(200, topic);
   });
 };
@@ -48,12 +48,12 @@ Topics.show = function(req, res) {
 
 Topics.create = function(req, res) {
   var topic = Topic.build(req.body),
-      notValid = topic.validate();
+      validateErrors = topic.validate();
 
-  if(notValid) return res.json(500, {errors: notValid});
+  if(validateErrors) return res.json(500, {error: validateErrors});
 
   topic.save().complete(function(err, topic) {
-    if(err) return res.json(500, err);
+    if(err) return res.json(500, {error: err});
     return res.json(201, topic);
   });
 };
@@ -67,11 +67,11 @@ Topics.create = function(req, res) {
 
 Topics.update = function(req, res) {
   Topic.find(req.params.topic_id).complete(function(err, topic) {
-    if(err) return res.json(500, err);
-    if(!topic) return res.json(404, {error: 'Not found'});
+    if(err) return res.json(500, {error: err});
+    if(!topic) return res.json(404, {error: 'not found'});
 
     topic.update(req.body, function(err, topic) {
-      if(err) return res.json(500, err);
+      if(err) return res.json(500, {error: err});
       return res.json(topic);
     });
   });
@@ -86,11 +86,11 @@ Topics.update = function(req, res) {
 
 Topics.destroy = function(req, res) {
   Topic.find(req.params.topic_id).complete(function(err, topic) {
-    if(err) return res.json(500, err);
-    if(!topic) return res.json(404, {error: 'Not found'});
+    if(err) return res.json(500, {error: err});
+    if(!topic) return res.json(404, {error: 'not found'});
 
     topic.destroy().complete(function(err) {
-      if(err) return res.json(500, err);
+      if(err) return res.json(500, {error: err});
       return res.json(200, {status: 1});
     });
   });
