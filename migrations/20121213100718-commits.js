@@ -1,6 +1,6 @@
 module.exports = {
   up: function(migration, DataTypes) {
-    migration.createTable('commits', {
+    migration.createTable('Commits', {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -33,9 +33,9 @@ module.exports = {
     });
 
     // Foreign Key Index
-    migration.addIndex('commits', ['item_id', 'user_id']);
+    migration.addIndex('Commits', ['item_id', 'user_id']);
   },
   down: function(migration) {
-    migration.dropTable('commits');
+    migration.dropTable('Commits');
   }
 };

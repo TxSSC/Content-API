@@ -1,6 +1,6 @@
 module.exports = {
   up: function(migration, DataTypes) {
-    migration.createTable('topics', {
+    migration.createTable('Topics', {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -29,6 +29,6 @@ module.exports = {
     });
   },
   down: function(migration) {
-    migration.dropTable('topics');
+    migration.dropTable('Topics');
   }
 };

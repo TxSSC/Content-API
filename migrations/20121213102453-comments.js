@@ -1,6 +1,6 @@
 module.exports = {
   up: function(migration, DataTypes) {
-    migration.createTable('comments', {
+    migration.createTable('Comments', {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -37,11 +37,11 @@ module.exports = {
     });
 
     // Foreign Key Index
-    migration.addIndex('comments', ['item_id']);
-    migration.addIndex('comments', ['version_id']);
-    migration.addIndex('comments', ['user_id']);
+    migration.addIndex('Comments', ['item_id']);
+    migration.addIndex('Comments', ['version_id']);
+    migration.addIndex('Comments', ['user_id']);
   },
   down: function(migration) {
-    migration.dropTable('comments');
+    migration.dropTable('Comments');
   }
 };
