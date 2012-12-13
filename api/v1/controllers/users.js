@@ -18,7 +18,7 @@ var User = module.exports = exports;
 
 User.index = function(req, res) {
   UserModel.findAll().done(function(err, result) {
-    if(err) return res.json(400, { error: 'Error retrieving records.'});
+    if(err) return res.json(500, err);
     res.json(result);
   });
 };
@@ -31,8 +31,9 @@ User.index = function(req, res) {
 
 User.show = function(req, res) {
   UserModel.find(req.params.id).done(function(err, result) {
-    if(err) return res.json(400, { error: 'No record exists with that ID.'});
-    res.json(200, result);
+    if(err) return res.json(500, err);
+    if(!result) return res.json(404, { error: 'Not found' });
+    return res.json(200, result);
   });
 };
 
@@ -43,18 +44,16 @@ User.show = function(req, res) {
  */
 
 User.create = function(req, res) {
-  var user, error;
-
   if(!req.body) return res.json(400, { error: 'invalid json' });
 
-  user = UserModel.build(req.body);
-  error = user.validate();
+  var user = User.build(req.body),
+      error = user.validate();
 
-  if(error) return res.json(400, { error: error });
+  if(error) return res.json(500, {errors: error});
 
-  user.save().done(function(err, result) {
-    if(err) return res.json(500, { error: err });
-    res.json(201, result);
+  user.save().complete(function(err, user) {
+    if(err) return res.json(500, err);
+    return res.json(201, topic);
   });
 };
 
@@ -65,26 +64,15 @@ User.create = function(req, res) {
  */
 
 User.update = function(req, res) {
-  var data, error;
-
   if(!req.body) return res.json(400, { error: 'invalid json' });
 
-  UserModel.find(req.params.id).done(function(err, user) {
-    if(err) return res.json(400, { error: 'No record exists with that ID.'});
+  User.find(req.params.id).complete(function(err, user) {
+    if(err) return res.json(500, err);
+    if(!user) return res.json(404, {error: 'Not found'});
 
-    data = req.body;
-
-    user.first_name = data.first_name || user.first_name;
-    user.last_name = data.last_name || user.last_name;
-    user.email = data.email || user.email;
-
-    error = user.validate();
-
-    if(error) return res.json(400, { error: error });
-
-    user.save().done(function(err, result) {
-      if(err) return res.json(500, { error: err });
-      res.json(201, result);
+    user.update(req.body, function(err, user) {
+      if(err) return res.json(500, err);
+      return res.json(user);
     });
   });
 };
@@ -97,7 +85,8 @@ User.update = function(req, res) {
 
 User.destroy = function(req, res) {
   UserModel.find(req.params.id).done(function(err, user) {
-    if(err || !user) return res.json(400, { error: 'No record exists with that ID.'});
+    if(err) return res.json(500, err);
+    if(!user) return res.json(400, { error: 'Not found' });
 
     user.destroy().done(function(error, result) {
       if(error) return res.json(400, { error: error });
