@@ -15,7 +15,7 @@ describe('Item', function() {
 
   describe('validation', function() {
 
-    it('should not validation with empty title', function() {
+    it('should not validate with empty title', function() {
       var item = Item.build({});
 
       item.validate().should.have.property('title');
