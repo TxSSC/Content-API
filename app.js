@@ -42,7 +42,7 @@ Addons.map.call(app);
 
 app.map({
   '/api': {
-    '/v1': require('./api').v1
+    '/v1': require('./api').v1(app)
   }
 });
 
