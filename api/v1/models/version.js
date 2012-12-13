@@ -28,8 +28,8 @@ module.exports = function(sequelize) {
     name: {
       type: Sequelize.STRING,
       validate: {
-	notEmpty: true,
-	notNull: true
+        notEmpty: true,
+        notNull: true
       }
     },
     published: {

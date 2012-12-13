@@ -23,7 +23,7 @@ describe('Version', function() {
 
     it('should pass with title', function() {
       var version = Version.build({
-	name: 'Version name'
+        name: 'Version name'
       });
 
       should.not.exist(version.validate());
@@ -36,22 +36,22 @@ describe('Version', function() {
 
     before(function(done) {
       Fixtures.Topic().save().success(function(topic) {
-	Topic = topic;
-	done();
+        Topic = topic;
+        done();
       });
     });
 
     it('should associate a version with a topic', function(done) {
       var version = Version.build({
-	name: 'version model'
+         name: 'version model'
       });
 
       version.setTopic(Topic);
 
       version.getTopic().success(function(topic) {
-	should.exist(topic);
-	topic.title.should.eql('Topic Model');
-	done();
+        should.exist(topic);
+        topic.title.should.eql('Topic Model');
+        done();
       });
     });
 

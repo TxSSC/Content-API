@@ -62,13 +62,13 @@ describe('User', function() {
       });
 
       user.save()
-	.success(function(result) {
-	  result.email.should.equal('han.solo@gmail.com');
-	  return done();
-	})
-	.error(function(error) {
-	  return done(error);
-	});
+        .success(function(result) {
+          result.email.should.equal('han.solo@gmail.com');
+          return done();
+        })
+        .error(function(error) {
+          return done(error);
+        });
 
     });
   });
