@@ -1,18 +1,15 @@
 var should = require('should'),
-    User = require('../support').models.User;
+    User = require('../support').models.User,
+    Helpers = require('../support').helpers;
 
 describe('User', function() {
 
   before(function(done) {
-    User.sync().success(function() {
-      done();
-    });
+    Helpers.Up(done);
   });
 
   after(function(done) {
-    User.drop().success(function() {
-      done();
-    });
+    Helpers.Down(done);
   });
 
   describe('.validations', function() {

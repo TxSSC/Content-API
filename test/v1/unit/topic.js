@@ -1,8 +1,16 @@
 var should = require('should'),
-    Topic = require('../support').models.Topic;
-
+    Topic = require('../support').models.Topic,
+    Helpers = require('../support').helpers;
 
 describe('Topic', function() {
+
+  before(function(done) {
+    Helpers.Up(done);
+  });
+
+  after(function(done) {
+    Helpers.Down(done);
+  });
 
   describe('static function', function() {
 
