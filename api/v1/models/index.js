@@ -70,21 +70,31 @@ module.exports = (function() {
    * Set Associations
    */
 
-  // Versions Associations
-  models.Topic.hasMany(models.Version, { as: 'Versions' });
-  models.Item.belongsTo(models.Topic);
-  models.Item.hasMany(models.Commit, { as: 'Commits'});
-  models.Version.belongsTo(models.Topic);
-  models.Commit.belongsTo(models.Item);
-  models.Commit.belongsTo(models.User);
+  models.User
+          .hasMany(models.Comment, { as: 'Comments' });
 
-  // Comments associations
-  models.User.hasMany(models.Comment, { as: 'Comments' });
-  models.Item.hasMany(models.Comment, { as: 'Comments' });
-  models.Version.hasMany(models.Comment, { as: 'Comments' });
-  models.Comment.belongsTo(models.User);
-  models.Comment.belongsTo(models.Item);
-  models.Comment.belongsTo(models.Version);
+  models.Topic
+          .hasMany(models.Version, { as: 'Versions' });
+
+  models.Item
+          .belongsTo(models.Topic)
+          .hasMany(models.Commit, { as: 'Commits'})
+          .hasMany(models.Comment, { as: 'Comments' });
+
+  models.Commit
+          .belongsTo(models.Item)
+          .belongsTo(models.User)
+          .hasMany(models.Version, { as: 'Versions' });
+
+  models.Version
+          .belongsTo(models.Topic)
+          .hasMany(models.Comment, { as: 'Comments' })
+          .hasMany(models.Commit, { as: 'Commits' });
+
+  models.Comment
+          .belongsTo(models.User)
+          .belongsTo(models.Item)
+          .belongsTo(models.Version);
 
   /**
    * Return all models
