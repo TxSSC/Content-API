@@ -1,10 +1,15 @@
+/**
+ * Require `controllers`
+ */
+
+var controllers = require('./controllers');
 
 /**
  * Version 1 JSON API
  * uses app.map to map routes in express
  */
 
-module.exports = function() {
+module.exports = {
 
   /**
    * Access Levels:
@@ -14,7 +19,14 @@ module.exports = function() {
    * 2 - Creator (can create buckets, items and properties)
    */
 
-  return {
+  '/topics': {
+    get: controllers.Topics.index,
+    post: controllers.Topics.create,
 
-  };
+    '/:topic_id': {
+      get: controllers.Topics.show,
+      put: controllers.Topics.update,
+      del: controllers.Topics.destroy
+    }
+  }
 };
