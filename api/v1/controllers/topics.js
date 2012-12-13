@@ -32,9 +32,7 @@ Topics.index = function(req, res) {
  */
 
 Topics.show = function(req, res) {
-  var id = req.params.topic_id;
-
-  Topic.find({id: id}).complete(function(err, topic) {
+  Topic.find(req.params.topic_id).complete(function(err, topic) {
     if(err) return res.json(500, err);
     if(!topic) return res.json(404, {error: 'Not found'});
     return res.json(200, topic);
@@ -68,21 +66,11 @@ Topics.create = function(req, res) {
  */
 
 Topics.update = function(req, res) {
-  var notValid,
-      data = req.body,
-      id = req.params.topic_id;
-
-  Topic.find({id: id}).complete(function(err, topic) {
+  Topic.find(req.params.topic_id).complete(function(err, topic) {
     if(err) return res.json(500, err);
     if(!topic) return res.json(404, {error: 'Not found'});
 
-    topic.title = data.title || topic.title;
-    topic.permalink = data.permalink || topic.permalink;
-    notValid = topic.validate();
-
-    if(notValid) return res.json(500, {errors: notValid});
-
-    topic.save().complete(function(err, topic) {
+    topic.update(req.body, function(err, topic) {
       if(err) return res.json(500, err);
       return res.json(topic);
     });
@@ -97,9 +85,7 @@ Topics.update = function(req, res) {
  */
 
 Topics.destroy = function(req, res) {
-  var id = req.params.topic_id;
-
-  Topic.find({id: id}).complete(function(err, topic) {
+  Topic.find(req.params.topic_id).complete(function(err, topic) {
     if(err) return res.json(500, err);
     if(!topic) return res.json(404, {error: 'Not found'});
 
