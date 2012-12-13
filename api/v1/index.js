@@ -57,7 +57,18 @@ module.exports = {
         '/:version_id': {
           get: controllers.Versions.show,
           put: controllers.Versions.update,
-          del: controllers.Versions.destroy
+          del: controllers.Versions.destroy,
+
+          '/comments': {
+            get: controllers.Comments.index,
+            post: controllers.Comments.create,
+
+            '/:comment_id': {
+              get: controllers.Comments.show,
+              put: controllers.Comments.update,
+              del: controllers.Comments.destroy
+            }
+          }
         }
       }
     }
