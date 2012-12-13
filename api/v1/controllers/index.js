@@ -7,5 +7,6 @@ module.exports = {
   Users: require('./users'),
   Items: require('./items'),
   Versions: require('./versions'),
-  Comments: require('./comments')
+  Comments: require('./comments'),
+  Commits: require('./commits')
 };
