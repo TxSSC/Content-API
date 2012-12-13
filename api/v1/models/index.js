@@ -56,6 +56,7 @@ module.exports = (function() {
    */
 
   return {
+    Sequelize: sequelize,
     User: require('./user')(sequelize),
     Topic: require('./topic')(sequelize),
     Item: require('./item')(sequelize),
