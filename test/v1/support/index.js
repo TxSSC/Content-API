@@ -2,6 +2,8 @@
  * Expose support
  */
 
+var models = require('../../../api/v1/models');
+
 module.exports = {
 
   /**
@@ -9,7 +11,6 @@ module.exports = {
    * - just change if model path changes
    */
 
-  models: require('../../../api/v1/models'),
-
-  fixtures: require('./fixtures')
+  models: models,
+  helpers: require('./helpers')(models.Sequelize)
 };
