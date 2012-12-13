@@ -5,5 +5,6 @@
 module.exports = {
   Topics: require('./topics'),
   Users: require('./users'),
+  Items: require('./items'),
   Versions: require('./versions')
 };

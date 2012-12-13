@@ -39,6 +39,17 @@ module.exports = {
       put: controllers.Topics.update,
       del: controllers.Topics.destroy,
 
+      '/items': {
+        get: controllers.Items.index,
+        post: controllers.Items.create,
+
+        '/:item_id': {
+          get: controllers.Items.show,
+          put: controllers.Items.update,
+          del: controllers.Items.destroy
+        }
+      },
+
       '/versions': {
         get: controllers.Versions.index,
         post: controllers.Versions.create,
