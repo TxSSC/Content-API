@@ -42,7 +42,41 @@ module.exports = (function() {
     options.define = {
       charset: 'utf8',
       timeStamps: true,
-      underscored: true
+      underscored: true,
+
+      /**
+       * Global model instance methods
+       */
+
+      instanceMethods: {
+
+        /**
+         * Update attributes and call `.validate()` on the model
+         *  - if it passes call `.save()`
+         *
+         * @param {Object} data
+         * @param {Function} callback
+         */
+
+        update: function(data, callback) {
+          var validateErrors;
+
+          for(var key in data) {
+            if(this.hasOwnProperty(key)) {
+              this[key] = data[key];
+            }
+          }
+
+          validateErrors = this.validate();
+
+          if(validateErrors) {
+            return callback(validateErrors);
+          }
+          else {
+            return this.save().complete(callback);
+          }
+        }
+      }
     };
 
     /**
