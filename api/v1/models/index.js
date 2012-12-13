@@ -72,6 +72,7 @@ module.exports = (function() {
 
   // Versions Associations
   models.Topic.hasMany(models.Version, { as: 'Versions' });
+  models.Item.belongsTo(models.Topic);
   models.Version.belongsTo(models.Topic);
 
   // Comments associations

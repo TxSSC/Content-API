@@ -9,12 +9,6 @@
 module.exports = function(sequelize, DataTypes) {
 
   /**
-   * Model dependencies for associations
-   */
-
-  var Topic = sequelize.import(__dirname + '/topic');
-
-  /**
    * Item model definition
    */
 
@@ -33,12 +27,6 @@ module.exports = function(sequelize, DataTypes) {
     }
 
   });
-
-  /**
-   * Model associations
-   */
-
-  Item.belongsTo(Topic);
 
   /**
    * Return Item model
