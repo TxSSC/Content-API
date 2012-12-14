@@ -57,7 +57,18 @@ module.exports = function(app) {
           '/:item_id': {
             get: controllers.Items.show,
             put: controllers.Items.update,
-            del: controllers.Items.destroy
+            del: controllers.Items.destroy,
+
+            '/commits': {
+              get: controllers.Commits.show,
+              post: controllers.Commits.create,
+
+              '/:commit_id': {
+                get: controllers.Commits.show,
+                put: controllers.Commits.update,
+                del: controllers.Commits.destroy
+              }
+            }
           }
         },
 
@@ -65,27 +76,21 @@ module.exports = function(app) {
           get: controllers.Versions.index,
           post: controllers.Versions.create,
 
-<<<<<<< HEAD
-        '/:version_id': {
-          get: controllers.Versions.show,
-          put: controllers.Versions.update,
-          del: controllers.Versions.destroy,
-
-          '/comments': {
-            get: controllers.Comments.index,
-            post: controllers.Comments.create,
-
-            '/:comment_id': {
-              get: controllers.Comments.show,
-              put: controllers.Comments.update,
-              del: controllers.Comments.destroy
-            }
-=======
           '/:version_id': {
             get: controllers.Versions.show,
             put: controllers.Versions.update,
-            del: controllers.Versions.destroy
->>>>>>> e951130... add some sweet param middleware
+            del: controllers.Versions.destroy,
+
+            '/comments': {
+              get: controllers.Comments.index,
+              post: controllers.Comments.create,
+
+              '/:comment_id': {
+                get: controllers.Comments.show,
+                put: controllers.Comments.update,
+                del: controllers.Comments.destroy
+              }
+            }
           }
         }
       }
